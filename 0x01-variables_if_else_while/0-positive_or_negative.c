@@ -3,7 +3,8 @@
 #include <stdio.h>
 
 /**
- * main entry for the program
+ * main - entry point for the program
+ * Return: 0 if the program exists succesfully
  */
 int main(void)
 {
