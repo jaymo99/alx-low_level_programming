@@ -13,6 +13,7 @@ void print_all_digits(int i);
 void times_table(void);
 int add(int, int);
 void print_to_98(int n);
+void print_numbers_ascending(int, int);
+
 
 #endif
-
