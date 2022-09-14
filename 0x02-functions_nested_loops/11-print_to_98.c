@@ -73,9 +73,9 @@ void print_numbers_ascending(int starting, int stopping)
     for (n = n; n <= stopping; n++)
     {
     /* negative numbers */
-        if (n < -1)
+        if (n < 0)
         {
-            m = n * -2;
+            m = n * -1;
             _putchar('-');
             print_all_digits(m);
         }
