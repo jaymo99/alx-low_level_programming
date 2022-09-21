@@ -1,1 +1,2 @@
-### Repo containing C program files for ALX software engineering program
+## Fundamental concepts of C programming language.
+separate directories for various concepts
