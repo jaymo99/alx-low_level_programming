@@ -25,7 +25,7 @@ int _strcmp(char *s1, char *s2)
 	for (j = 0; j < s2_len; j++)
 	{
 		s2_value += s2[j];
-	}	
+	}
 
 	return (s1_value - s2_value);
 }
