@@ -58,7 +58,8 @@ bool is_alphabet(char c)
  */
 bool is_word_separator(char c)
 {
-	char word_separators[] = {' ', '	', '\n', ',', ';', '.', '!', '?', '"', '(', ')', '{', '}'};
+	char word_separators[] = {' ', '	', '\n', ',', ';', '.', '!'};
+	char word_separators2[] = {'?', '"', '(', ')', '{', '}'};
 	int len = strlen(word_separators);
 	int i;
 	bool result = false;
@@ -67,25 +68,11 @@ bool is_word_separator(char c)
 	{
 		if (c == word_separators[i])
 			result = true;
+		if (c == word_separators2[i])
+			result = true;
 	}
 
 	return (result);
-}
-
-/**
- * is_new-word - checks for beginning of a new word
- * @prev: previous/preceding character
- * @c: current character
- *
- * Return: true, if character is at the start of a new word
- * false, otherwise
- */
-bool is_new_word(char prev, char c)
-{
-	if (is_word_separator(prev) && is_alphabet(c))
-		return (true);
-	else
-		return (false);
 }
 
 /**
@@ -97,16 +84,22 @@ bool is_new_word(char prev, char c)
 char *cap_string(char *str)
 {
 	int i = 0;
+	bool is_new_word = false;
 
 	while (str[i] != '\0')
 	{
+		if (is_word_separator(str[i - 1]) && is_alphabet(str[i]))
+			is_new_word = true;
+		else
+			is_new_word = false;
+
 		/* lowercase at start of sentence */
 		if (i == 0 && is_lowercase(str[i]))
 		{
 			str[i] -= 32;
 		}
 
-		if (is_new_word(str[i - 1], str[i]) && is_lowercase(str[i]))
+		if (is_new_word && is_lowercase(str[i]))
 			str[i] -= 32;
 
 		i++;
