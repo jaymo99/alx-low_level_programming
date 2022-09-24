@@ -13,19 +13,13 @@
  */
 int _strcmp(char *s1, char *s2)
 {
-	int s1_len = strlen(s1);
-	int s2_len = strlen(s2);
-	int i, j, s1_value = 0, s2_value = 0;
+	int i = 0, res = 0;
 
-	for (i = 0; i < s1_len; i++)
+	while (s1[i] != '\0' && s2[i] != '\0' && res == 0)
 	{
-		s1_value += s1[i];
+		res = s1[i] - s2[i];
+		i++;
 	}
 
-	for (j = 0; j < s2_len; j++)
-	{
-		s2_value += s2[j];
-	}
-
-	return (s1_value - s2_value);
+	return (res);
 }
