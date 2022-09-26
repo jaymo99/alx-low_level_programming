@@ -14,6 +14,7 @@ char *_strchr(char *s, char c)
 	int i = 0;
 	int len = strlen(s);
 
+	/* len + 1 searches even the nul byte terminator */
 	for (i = 0; i < len + 1; i++)
 	{
 		if (s[i] == c)
