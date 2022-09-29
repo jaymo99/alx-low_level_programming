@@ -1,6 +1,5 @@
 #include "main.h"
 
-int match_chars(char *a, char *b);
 char *next_match(char *a, char b);
 
 /**
@@ -17,42 +16,27 @@ char *next_match(char *a, char b);
  */
 int wildcmp(char *s1, char *s2)
 {
-	return (match_chars(s1, s2));
-}
-
-
-/**
- * match_chars
- * @a:
- * @b:
- *
- * Return: 1, if the characters match.
- * 0, otherwise.
- */
-int match_chars(char *a, char *b)
-{
 	/* if both strings are at the end */
-	if (*a == *b && *a == '\0')
+	if (*s1 == *s2 && *s1 == '\0')
 		return (1);
 
-	if (*a == '\0' && *b != '\0')
+	if (*s1 == '\0' && *s2 != '\0')
 		return (0);
-	else if (*b == '\0' && *a != '\0')
+	else if (*s2 == '\0' && *s1 != '\0')
 		return (0);
 
-	if (*b == '*')
+	if (*s2 == '*')
 	{
-		char *ptr = next_match(a, *(b + 1));
+		char *ptr = next_match(s1, *(s2 + 1));
 
-		return (match_chars(ptr, b + 1));
+		return (wildcmp(ptr, s2 + 1));
 
 	}
 
-	if (*a != *b)
+	if (*s1 != *s2)
 		return (0);
 
-	return (match_chars(a + 1, b + 1));
-
+	return (wildcmp(s1 + 1, s2 + 1));
 }
 
 /**
