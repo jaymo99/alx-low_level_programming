@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 int pick_coin(int a);
+
 /**
  * main - prints the minimum number of coins to make change
  * for an amount of money
@@ -24,6 +25,13 @@ int main(int argc, char *argv[])
 	}
 
 	num = atoi(argv[1]);
+
+	/* detect non-numerical values */
+	if (num == 0 && *argv[1] != '0')
+	{
+		printf("Error\n");
+		return (1);
+	}
 
 	/* negative numbers */
 	if (num < 0)
