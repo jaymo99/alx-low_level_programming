@@ -8,8 +8,8 @@
  *
  * Return: a pointer to the newly allocated space in memory,
  * (which contains a copy of the string given as a parameter)
- * OR: NULL if str = NULL
- * OR: NULL if insufficient memory was available
+ * NULL if str = NULL
+ * NULL if insufficient memory was available
  */
 char *_strdup(char *str)
 {
