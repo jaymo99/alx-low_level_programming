@@ -20,6 +20,9 @@ char *str_concat(char *s1, char *s2)
 	char *ptr;
 	int i = 0, j = 0, counter = 0;
 
+	if (s1 == NULL && s2 == NULL)
+		return (NULL);
+
 	if (s1 == NULL)
 		len1 = 0;
 	else
@@ -36,20 +39,25 @@ char *str_concat(char *s1, char *s2)
 	if (ptr == NULL)
 		return (NULL);
 
-	if (s1 == NULL && s2 == NULL)
-		return (NULL);
-
-	for (i = 0; i < len1; i++)
+	if (s1 != NULL)
 	{
-		*(ptr + counter) = *(s1 + i);
-		counter++;
+		for (i = 0; i < len1; i++)
+		{
+			*(ptr + counter) = *(s1 + i);
+			counter++;
+		}
 	}
 
-	for (; j <= len2; j++)
+	if (s2 != NULL)
 	{
-		*(ptr + counter) = *(s2 + j);
-		counter++;
+		for (; j < len2; j++)
+		{
+			*(ptr + counter) = *(s2 + j);
+			counter++;
+		}
 	}
+
+	*(ptr + counter) = '\0';
 
 	return (ptr);
 }
