@@ -6,6 +6,10 @@ void _print(char *str);
 int only_digits(char *argv[]);
 /**
  * main - multiplies two positive numbers
+ * @argc: argument count
+ * @argv: argument vector
+ *
+ * Return: Always 0 (success)
  */
 int main(int argc, char *argv[])
 {
@@ -50,7 +54,7 @@ void _print(char *str)
 
 /**
  * only_digits - checks if the first 2 arguments are all digits
- * @argv - argument vector
+ * @argv: argument vector
  *
  * Return: 1 if all characters are digits
  * 0 otherwise
