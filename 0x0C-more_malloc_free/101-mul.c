@@ -1,9 +1,9 @@
 #include "main.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 void _print(char *str);
 int only_digits(char *argv[]);
+void _print_num(unsigned long num);
 /**
  * main - multiplies two positive numbers
  * @argc: argument count
@@ -13,7 +13,7 @@ int only_digits(char *argv[]);
  */
 int main(int argc, char *argv[])
 {
-	int num1, num2, prod;
+	unsigned long num1, num2, prod;
 
 	/* it is mandatory to pass in 2 arguments */
 	if (argc != 3)
@@ -33,7 +33,8 @@ int main(int argc, char *argv[])
 	num2 = atoi(argv[2]);
 	prod = num1 * num2;
 
-	printf("%d\n", prod);
+	_print_num(prod);
+	_putchar('\n');
 	return (0);
 }
 
@@ -52,6 +53,20 @@ void _print(char *str)
 	}
 }
 
+
+/**
+ * _print_num - prints numbers
+ * @num: number to print
+ */
+void _print_num(unsigned long num)
+{
+	if (num > 10)
+	{
+		_print_num (num / 10);
+	}
+
+	_putchar(num % 10 + '0');
+}
 /**
  * only_digits - checks if the first 2 arguments are all digits
  * @argv: argument vector
