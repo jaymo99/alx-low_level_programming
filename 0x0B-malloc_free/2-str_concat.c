@@ -2,7 +2,9 @@
 #include <string.h>
 #include <stdlib.h>
 
+/* function prototype */
 void find_len(char *s1, char *s2, int *ptr);
+
 /**
  * str_concat - concatenates two strings
  * @s1: pointer to string one
@@ -19,8 +21,11 @@ char *str_concat(char *s1, char *s2)
 	int all_len[3];
 	char *ptr;
 
-	if (s1 == NULL && s2 == NULL)
-		return (NULL);
+	if (s1 == NULL)
+		s1 = "";
+
+	if (s2 == NULL)
+		s2 = "";
 
 	find_len(s1, s2, all_len);
 	len1 = all_len[0];
@@ -59,7 +64,7 @@ char *str_concat(char *s1, char *s2)
  * @s2: pointer to string two
  * @ptr: pointer to the first element of an int array.
  *
- * Description: this functions assigns values of the lengths 
+ * Description: this functions assigns values of the lengths
  * of s1, s2, and the new string to the array pointed to by
  * @ptr.
  */
