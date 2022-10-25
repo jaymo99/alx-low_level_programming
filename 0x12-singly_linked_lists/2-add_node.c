@@ -12,17 +12,23 @@
  * on failure, NULL.
  */
 list_t *add_node(list_t **head, const char *str)
-{	
+{
 	list_t *new_node;
 
 	new_node = malloc(sizeof(list_t));
 	if (new_node == NULL)
 	{
 		printf("Error\n");
+		free(new_node);
 		exit(1);
 	}
 
 	new_node->str = strdup(str);
+	if (new_node->str == NULL)
+	{
+		free(new_node);
+		exit(1);
+	}
 	new_node->len = strlen(new_node->str);
 	new_node->next = *head;
 
