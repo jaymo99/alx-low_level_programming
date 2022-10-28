@@ -12,7 +12,7 @@ int pop_listint(listint_t **head)
 	int n;
 
 	if (head == NULL)
-		exit(0);
+		return (0);
 
 	if (*head != NULL)
 	{
@@ -22,7 +22,7 @@ int pop_listint(listint_t **head)
 		*head = ptr;
 	}
 	else
-		exit(1);
+		return (0);
 
 	return (n);
 }
