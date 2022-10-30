@@ -53,6 +53,7 @@ size_t print_listint_safe(const listint_t *head)
 		count++;
 	}
 
+	free_list_addr(addresses);
 	return (count);
 }
 
@@ -80,6 +81,19 @@ list_addr *add_node_addr(list_addr **head, listint_t *addr)
 	*head = new_node;
 
 	return (new_node);
+}
+
+/**
+ * free_list_addr - frees a list_addr linked list.
+ * @head: pointer to head.
+ */
+void free_list_addr(list_addr *head)
+{
+	if (head->next != NULL)
+		free_list_addr(head->next);
+	
+	free(head->addr);
+	free(head);
 }
 
 /**

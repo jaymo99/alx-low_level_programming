@@ -55,5 +55,6 @@ listint_t *find_listint_loop(listint_t *head);
 void attach_tail(listint_t *head, listint_t *new_node);
 int find_addr(list_addr *head, const listint_t *addr);
 list_addr *add_node_addr(list_addr **head, listint_t *addr);
+void free_list_addr(list_addr *head);
 
 #endif /* LISTS_H */
