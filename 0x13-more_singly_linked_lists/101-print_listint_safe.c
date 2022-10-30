@@ -14,6 +14,7 @@
  */
 size_t print_listint_safe(const listint_t *head)
 {
+	/* list of addresses */
 	list_addr *addresses = NULL;
 	listint_t *temp = NULL;
 	size_t count = 0;
@@ -22,7 +23,9 @@ size_t print_listint_safe(const listint_t *head)
 	if (head == NULL)
 		return (count);
 
+	/* add to the list of addresses */
 	add_node_addr(&addresses, (void *)head);
+
 	printf("[%p] %d\n", (void *)head, head->n);
 	temp = head->next;
 	count++;
@@ -37,7 +40,9 @@ size_t print_listint_safe(const listint_t *head)
 			break;
 		}
 
+		/* add to the list of addresses */
 		add_node_addr(&addresses, temp);
+
 		printf("[%p] %d\n", (void *)temp, temp->n);
 		temp = temp->next;
 		count++;
@@ -64,7 +69,7 @@ list_addr *add_node_addr(list_addr **head, listint_t *addr)
 
 	new_node = malloc(sizeof(list_addr));
 	if (new_node == NULL)
-		return (NULL);
+		exit(98);
 
 	new_node->addr = addr;
 	new_node->next = *head;
