@@ -19,7 +19,8 @@ size_t print_listint_safe(const listint_t *head)
 	size_t count = 0;
 	int status;
 
-	if (head == NULL) return (count);
+	if (head == NULL)
+		return (count);
 
 	add_node_addr(&addresses, (void *)head);
 	printf("[%p] %d\n", (void *)head, head->n);
