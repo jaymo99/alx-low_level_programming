@@ -2,20 +2,10 @@
 #include <stdio.h>
 
 /**
- * pseudocode
-	1. Create a list of addresses.
-	2. Check if the current node is in the list,
-		*If it is, quit
-		*Else, add address to the list.
-	3. Print the node contents.
- */
-
-
-/**
  * print_listint_safe - prints a listint_t linked list.
  *
  * @head: pointer to first node.
- * 
+ *
  * Description: This function can print lists with a loop.
  * It goes through the list only once.
  *
@@ -91,7 +81,7 @@ void free_list_addr(list_addr *head)
 {
 	if (head->next != NULL)
 		free_list_addr(head->next);
-	
+
 	free(head->addr);
 	free(head);
 }
