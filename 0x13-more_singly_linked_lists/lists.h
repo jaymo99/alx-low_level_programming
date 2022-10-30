@@ -17,6 +17,19 @@ typedef struct listint_s
 	struct listint_s *next;
 } listint_t;
 
+/**
+ * struct list_addr - singly linked list of addresses.
+ * @addr: address of type listint_t
+ * @next: points to the next node
+ *
+ * Description: singly linked list node structure
+ */
+typedef struct list_addr
+{
+	listint_t *addr;
+	struct list_addr *next;
+} list_addr;
+
 int _putchar(char c);
 
 /* main functions (mandatory tasks) */
@@ -40,6 +53,7 @@ listint_t *find_listint_loop(listint_t *head);
 
 /* helper functions */
 void attach_tail(listint_t *head, listint_t *new_node);
-
+int find_addr(list_addr *head, const listint_t *addr);
+list_addr *add_node_addr(list_addr **head, listint_t *addr);
 
 #endif /* LISTS_H */
