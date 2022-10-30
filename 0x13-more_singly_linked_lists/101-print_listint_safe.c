@@ -43,6 +43,7 @@ size_t print_listint_safe(const listint_t *head)
 		count++;
 	}
 
+	free_list_addr(addresses);
 	return (count);
 }
 
@@ -81,7 +82,6 @@ void free_list_addr(list_addr *head)
 	if (head->next != NULL)
 		free_list_addr(head->next);
 
-	free(head->addr);
 	free(head);
 }
 
