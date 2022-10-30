@@ -31,7 +31,7 @@ size_t print_listint_safe(const listint_t *head)
 
 	if (head != NULL)
 	{
-		add_node_addr(&addresses, head);
+		add_node_addr(&addresses, (void *)head);
 		printf("[%p] %d\n", (void *)head, head->n);
 		temp = head->next;
 		count++;
