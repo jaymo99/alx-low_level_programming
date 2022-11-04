@@ -34,10 +34,10 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	if (buf == NULL)
 		exit(1);
 
-	count = read(fd, buf, letters);
+	read(fd, buf, letters);
 	buf[letters] = '\0';
 
-	count = write(STDOUT_FILENO, buf, count);
+	count = write(STDOUT_FILENO, buf, letters);
 
 	close(fd);
 	free(buf);
