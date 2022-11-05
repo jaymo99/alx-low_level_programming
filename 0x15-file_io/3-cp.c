@@ -66,16 +66,21 @@ void copy_content(int f_from, int f_to, char *file_to)
 
 	/* read the first 1024 bytes */
 	rd = read(f_from, buf, 1024);
+	if (rd < 0)
+		exit(0);
+
 	while (rd != 0)
 	{
 		wr = write(f_to, buf, rd);
 		if (wr < 0)
 		{
-			dprintf(STDERR_FILENO,"Error: Can't write to %s\n", file_to);
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", file_to);
 			exit(99);
 		}
 
 		/* read next 1024 bytes */
 		rd = read(f_from, buf, 1024);
+		if (rd < 0)
+			exit(0);
 	}
 }
