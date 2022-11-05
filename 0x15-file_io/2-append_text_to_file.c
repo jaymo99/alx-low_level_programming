@@ -25,7 +25,7 @@ int append_text_to_file(const char *filename, char *text_content)
 		return (-1);
 
 	/* length of string */
-	while (text_content[i] != '\0')
+	while (text_content != NULL && text_content[i] != '\0')
 	{
 		len++;
 		i++;
@@ -35,7 +35,7 @@ int append_text_to_file(const char *filename, char *text_content)
 	{
 		wr = write(fd, text_content, len);
 		if (wr < 0)
-			return (-3);
+			return (-1);
 	}
 
 	return (1);
