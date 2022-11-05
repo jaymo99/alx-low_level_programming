@@ -18,21 +18,21 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		dprintf(2, "Usage: cp file_from file_to\n");
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
 
 	f_from = open(argv[1], O_RDONLY);
 	if (f_from < 0)
 	{
-		dprintf(2, "Error: Can't read from file %s\n", argv[1]);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 		exit(98);
 	}
 
 	f_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC | O_APPEND, 0664);
 	if (f_to < 0)
 	{
-		dprintf(2, "Error: Can't write to %s\n", argv[2]);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 		exit(99);
 	}
 
@@ -41,12 +41,12 @@ int main(int argc, char *argv[])
 	/* close file descriptors */
 	if (close(f_from) < 0)
 	{
-		dprintf(2, "Error: Can't close fd %d\n", f_from);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", f_from);
 		exit(100);
 	}
 	if (close(f_to) < 0)
 	{
-		dprintf(2, "Error: Can't close fd %d\n", f_to);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", f_to);
 		exit(100);
 	}
 	return (0);
@@ -57,6 +57,7 @@ int main(int argc, char *argv[])
  *
  * @f_from: file to copy content from.
  * @f_to: file to copy content to.
+ * @file_to: Name of the file to copy content to.
  */
 void copy_content(int f_from, int f_to, char *file_to)
 {
@@ -70,7 +71,7 @@ void copy_content(int f_from, int f_to, char *file_to)
 		wr = write(f_to, buf, rd);
 		if (wr < 0)
 		{
-			dprintf(2, "Error: Can't write to %s\n", file_to);
+			dprintf(STDERR_FILENO,"Error: Can't write to %s\n", file_to);
 			exit(99);
 		}
 
