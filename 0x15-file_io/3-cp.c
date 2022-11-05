@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 		exit(99);
 	}
 
-	copy_content(f_from, f_to, argv[2]);
+	copy_content(f_from, f_to, argv[1], argv[2]);
 
 	/* close file descriptors */
 	if (close(f_from) < 0)
@@ -57,9 +57,10 @@ int main(int argc, char *argv[])
  *
  * @f_from: file to copy content from.
  * @f_to: file to copy content to.
+ * @file_from: Name of the file to copy content from.
  * @file_to: Name of the file to copy content to.
  */
-void copy_content(int f_from, int f_to, char *file_to)
+void copy_content(int f_from, int f_to, char *file_from, char *file_to)
 {
 	int rd, wr;
 	char buf[1024];
@@ -67,7 +68,10 @@ void copy_content(int f_from, int f_to, char *file_to)
 	/* read the first 1024 bytes */
 	rd = read(f_from, buf, 1024);
 	if (rd < 0)
-		exit(0);
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
+		exit(98);
+	}
 
 	while (rd != 0)
 	{
@@ -81,6 +85,9 @@ void copy_content(int f_from, int f_to, char *file_to)
 		/* read next 1024 bytes */
 		rd = read(f_from, buf, 1024);
 		if (rd < 0)
-			exit(0);
+		{
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", file_from);
+			exit(98);
+		}
 	}
 }
