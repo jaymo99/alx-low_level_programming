@@ -4,58 +4,54 @@
 #include <stdio.h>
 
 /**
- * split_str - splits a string into words
+ * split_str - splits a string into words.
  *
- * @src: the string to be split
+ * @str: the string to be split.
  *
- * Return: a linked list containing each word of the string.
+ * Return: a struct containing
+ *	-> an array containing each word of the string.
+ *	-> number of items in the array.
  */
-word_t *split_str(char *src)
+words_n split_str(char *str)
 {
-	const char del[6] = " ";
-	size_t len;
-	char *str,
-		 *token;
-	/* pointer to list of words */
-	word_t *head = NULL;
+	words_n wrds;
+	char **array;
+	char *token, *copy;
+	int i = 0, num_words = 0, len = 0;
 
-	if (src == NULL)
+	/* determine the number of words in the string */
+	len = strlen(str) + 1;
+	copy = malloc(sizeof(char) * len);
+	if (copy == NULL)
 	{
-		fprintf(stderr, "argument cannot be NULL\n");
+		perror("malloc failed to create copy");
 		exit(EXIT_FAILURE);
 	}
-
-	len = strlen(src);
-	str = malloc(sizeof(char) * (len + 1));
-	if (str == NULL)
-	{
-		fprintf(stderr, "malloc failed\n");
-		free(str);
-		exit(EXIT_FAILURE);
-	}
-
-	strcpy(str, src);
-	/* get the first token */
-	token = strtok(str, del);
-
-	/* walk through other tokens */
+	strcpy(copy, str);
+	token = strtok(copy, " ");
 	while (token != NULL)
 	{
-		/* add token to list */
-		add_node_end(&head, token);
-		token = strtok(NULL, del);
+		num_words++;
+		token = strtok(NULL, " ");
 	}
-	free(str);
-	return (head);
-}
+	free(copy);
+	/*---------------------------------------------*/
 
-int main(void)
-{
-	word_t *head;
+	/* insert tokens to array */
+	token = strtok(str, " ");
+	array = malloc(sizeof(char *) * num_words);
+	if (array == NULL)
+	{
+		perror("malloc failed to create array");
+		exit(EXIT_FAILURE);
+	}
 
-	head = split_str("One Two Three Four Five.");
-	print_list(head);
-	free_list(head);
-
-	return (0);
+	while (token != NULL)
+	{
+		array[i++] = token;
+		token = strtok(NULL, " ");
+	}
+	wrds.array = array;
+	wrds.num = num_words;
+	return (wrds);
 }

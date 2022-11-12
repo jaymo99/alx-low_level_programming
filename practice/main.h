@@ -1,24 +1,19 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <stddef.h>
-
 /**
- * struct w_token - singly linked list of words.
- * @str: string - (malloc'ed string)
- * @next: points to the next node
+ * struct words_n - an array of words
  *
- * Description: singly linked list node structure.
+ * @array: array containing word tokens
+ * @n_words: number of words/items in the array.
  */
-typedef struct word_t {
-	char *str;
-	struct word_t *next;
-} word_t;
+typedef struct words_n {
+	char **array;
+	int num;
+} words_n;
 
-/* functions that manipulate the linked list */
-word_t *add_node_end(word_t **head, const char *str);
-void free_list(word_t *head);
-size_t print_list(const word_t *h);
+/* secondary functions */
+words_n split_str(char *str);
 
 #endif /* MAIN_H */
 
