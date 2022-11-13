@@ -8,22 +8,24 @@
  * main - super simple shell that can run commands with their full
  * path, without any argument.
  *
+ * @ac: argument count
+ * @av: argument vector
+ *
  * Return: Always 0.
  */
-int main(void)
+int main(int ac, char **av, char **env)
 {
-	int i = 0, status;
+	int status;
 	char *line = NULL;
 	size_t len = 0;
 	ssize_t line_size;
 	words_n wrds;
 	pid_t child_pid;
 
-	printf("$ ");
+	printf("#cisfun$ ");
 	line_size = getline(&line, &len, stdin);
 	if (line_size < 0)
 	{
-		perror("getline error");
 		free(line);
 		exit(EXIT_FAILURE);
 	}
@@ -39,16 +41,16 @@ int main(void)
 
 	if (child_pid == 0)
 	{
-		if (execve(wrds.array[0], wrds.array, NULL) == -1)
+		if (execve(wrds.array[0], wrds.array, env) == -1)
 		{
-			perror("Error executing command");
+			perror(av[0]);
 			exit(EXIT_FAILURE);
 		}
 	}
 	wait(&status);
 	free(line);
 	free(wrds.array);
+	main(ac, av, env);
 
-	main();
 	return (0);
 }
