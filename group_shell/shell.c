@@ -16,7 +16,7 @@
 int main(int ac, char **av, char **env)
 {
 	int status;
-	char *line = NULL;
+	char *line = NULL, *file_path;
 	size_t len = 0;
 	ssize_t line_size;
 	words_n wrds;
@@ -37,17 +37,23 @@ int main(int ac, char **av, char **env)
 	line[line_size - 1] = '\0';
 
 	wrds = split_str(line);
-	child_pid = fork();
-
-	if (child_pid == 0)
+	file_path = get_file_path(wrds.array[0]);
+	if (file_path == NULL)
+		printf("command '%s' not found\n", wrds.array[0]);
+	else
 	{
-		if (execve(wrds.array[0], wrds.array, env) == -1)
+		child_pid = fork();
+
+		if (child_pid == 0)
 		{
-			perror(av[0]);
-			exit(EXIT_FAILURE);
+			if (execve(file_path, wrds.array, env) == -1)
+			{
+				perror(av[0]);
+				exit(EXIT_FAILURE);
+			}
 		}
+		wait(&status);
 	}
-	wait(&status);
 	free(line);
 	free(wrds.array);
 	main(ac, av, env);

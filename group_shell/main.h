@@ -14,6 +14,8 @@ typedef struct words_n {
 
 /* secondary functions */
 words_n split_str(char *str);
+char *get_file_path(char *file);
+char *find_file(char *token, char *file);
 
 #endif /* MAIN_H */
 
