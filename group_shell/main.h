@@ -5,9 +5,10 @@
  * struct words_n - an array of words
  *
  * @array: array containing word tokens
- * @n_words: number of words/items in the array.
+ * @num: number of words/items in the array.
  */
-typedef struct words_n {
+typedef struct words_n
+{
 	char **array;
 	int num;
 } words_n;
@@ -17,6 +18,7 @@ words_n split_str(char *str);
 char *get_file_path(char *file);
 char *find_file(char *token, char *file);
 char *check_builtins(char *cmd);
+char *init_shell(void);
 
 #endif /* MAIN_H */
 

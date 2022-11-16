@@ -8,6 +8,8 @@
 /**
  * get_file_path - looks for a file in the current PATH.
  *
+ * @file: the file to look for.
+ *
  * Return: on success, the full path of the specified file.
  * on failure, NULL
  */
