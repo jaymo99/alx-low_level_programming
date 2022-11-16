@@ -2,6 +2,7 @@
 #include <sys/stat.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 
 /**
@@ -27,7 +28,7 @@ char *get_file_path(char *file)
 	/* length of path string */
 	len = strlen(env_path);
 
-	/* include null byte '\0', and path to current directory '.:' */
+	/* len+3 for null byte '\0', and path to current directory '.:' */
 	str = malloc(sizeof(char) * (len + 3));
 	if (str == NULL)
 	{
@@ -83,4 +84,20 @@ char *find_file(char *token, char *file)
 	token = strtok(NULL, ":");
 	free(file_path);
 	return (find_file(token, file));
+}
+
+/**
+ * check_builtins - executes 'built-in' shell commands.
+ *
+ * @cmd: the command
+ *
+ * Return: on failure, NULL.
+ */
+char *check_builtins(char *cmd)
+{
+	if (strcmp(cmd, "exit") == 0)
+	{
+		_exit(0);
+	}
+	return (NULL);
 }

@@ -37,6 +37,8 @@ int main(int ac, char **av, char **env)
 	line[line_size - 1] = '\0';
 
 	wrds = split_str(line);
+	check_builtins(wrds.array[0]);
+
 	file_path = get_file_path(wrds.array[0]);
 	if (file_path == NULL)
 		printf("command '%s' not found\n", wrds.array[0]);
