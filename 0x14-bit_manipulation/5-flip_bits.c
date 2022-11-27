@@ -17,7 +17,7 @@ unsigned int flip_bits(unsigned long int n, unsigned long int m)
 
 	diff = n ^ m;
 	count = count_active_bits(diff);
-	
+
 	return (count);
 }
 
