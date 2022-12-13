@@ -8,9 +8,9 @@
 * Basic usage nm, ldd, ldconfig
 
 ### How To Create A Dynamic Library
-1. Type command 'gcc \*.c -c -fPIC' and hit return
+1. Type command `gcc \*.c -c -fPIC` and hit return
 	* This command generates one object file '.o' for each source file '.c'
-	* The code(-fPIC) flag ensures that the code is position-independent.
+	* The -fPIC flag ensures that the code is position-independent.
 	* The -c option ensures that each .o file is compiled but not linked yet
 2. Next type the following command 'gcc \*.o -shared -o libdynamic.so' (substitute your desired library name with 'dynamic') and hit return.
 	* The wildcard \* tells the compiler to compile all the .o files into a dynamic library which is specified by the -shared flag.
