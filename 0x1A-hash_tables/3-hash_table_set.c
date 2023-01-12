@@ -20,9 +20,10 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	hash_node_t *new_node = NULL;
 	hash_node_t *collision_node = NULL;
 	unsigned long int k_index;
-	size_t buffer_size = 0;
+	size_t key_size = 0;
+	size_t value_size = 0;
 
-	/* Create new hash_node and populate values */
+	/* Create new hash_node */
 	new_node = malloc(sizeof(hash_node_t));
 
 	if (new_node == NULL)
@@ -30,13 +31,25 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		return (0);
 	}
 
-	buffer_size = strlen(key) + 1;
-	new_node->key = malloc(sizeof(char) * buffer_size);
+	/* allocate memory for key*/
+	key_size = strlen(key) + 1;
+	new_node->key = malloc(sizeof(char) * key_size);
 	if (new_node->key == NULL)
 	{
+		/* malloc failure */
 		return (0);
 	}
 
+	/* allocate memory for value*/
+	value_size = strlen(value) + 1;
+	new_node->value = malloc(sizeof(char) * value_size);
+	if (new_node->value == NULL)
+	{
+		/* malloc failure */
+		return (0);
+	}
+
+	/* assign key/value to the new node */
 	strcpy(new_node->key, key);
 	strcpy(new_node->value, value);
 	new_node->next = NULL;
