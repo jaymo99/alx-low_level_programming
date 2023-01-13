@@ -50,4 +50,8 @@ int insert_item(hash_table_t *ht, unsigned int idx, hash_node_t *new_node);
 hash_node_t *hash_node_create(const char *key, const char *value);
 int update_list(hash_node_t *head, const char *key, const char *value);
 
+/* File: 4-hash_table_get.c */
+char *hash_table_get(const hash_table_t *ht, const char *key);
+
+
 #endif /* HASH_TABLES_H */
