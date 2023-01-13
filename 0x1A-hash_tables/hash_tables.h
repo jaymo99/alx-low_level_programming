@@ -46,6 +46,7 @@ void hash_table_delete(hash_table_t *ht);
 
 /* File: 3-hash_table_set.c */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value);
+int insert_item(hash_table_t *ht, unsigned int idx, hash_node_t *new_node);
 hash_node_t *hash_node_create(const char *key, const char *value);
 int update_list(hash_node_t *head, const char *key, const char *value);
 

@@ -18,7 +18,6 @@
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	hash_node_t *new_node = NULL;
-	hash_node_t *head = NULL;
 	unsigned long int k_index;
 
 	if (ht == NULL)
@@ -41,28 +40,43 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	/* Get index of the key */
 	k_index = key_index((unsigned char *)new_node->key, ht->size);
 
-	/* Insert key at the given index (check for collision) */
-	if (ht->array[k_index] == NULL)
+	/* Insert key at the given index */
+	insert_item(ht, k_index, new_node);
+	return (1);
+}
+
+/**
+ * insert_item - adds a key/value pair at an index in hash table
+ *
+ * @ht: hash table
+ * @idx: index position in the hash table
+ * @new_node: hash node containing key/value pair
+ *
+ * Return: Always 0, success
+ */
+int insert_item(hash_table_t *ht, unsigned int idx, hash_node_t *new_node)
+{
+	hash_node_t *head = NULL;
+
+	if (ht->array[idx] == NULL)
 	{
-		ht->array[k_index] = new_node;
+		ht->array[idx] = new_node;
 	}
 	else
 	{
 		/* head of linked list */
-		head = ht->array[k_index];
-		if (update_list(head, key, value) == 1)
+		head = ht->array[idx];
+		if (update_list(head, new_node->key, new_node->value))
 		{
-			return (1);
+			return (0);
 		}
 		else
 		{
 			new_node->next = head;
-			ht->array[k_index] = new_node;
-			return (1);
+			ht->array[idx] = new_node;
 		}
 	}
-
-	return (1);
+	return (0);
 }
 
 /**
@@ -111,7 +125,9 @@ hash_node_t *hash_node_create(const char *key, const char *value)
 }
 
 /**
- * update_list - updates the value attached to an existing key in a hash_node list.
+ * update_list - updates the value attached to an existing
+ * key in a hash_node list.
+ *
  * (The list is at an index in a hash table. It is created
  *	when a collision occurs at that index)
  *
