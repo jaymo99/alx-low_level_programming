@@ -52,6 +52,6 @@ int update_list(hash_node_t *head, const char *key, const char *value);
 
 /* File: 4-hash_table_get.c */
 char *hash_table_get(const hash_table_t *ht, const char *key);
-
+void print_word(char *word);
 
 #endif /* HASH_TABLES_H */
