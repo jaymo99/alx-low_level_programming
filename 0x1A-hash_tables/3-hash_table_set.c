@@ -18,7 +18,7 @@
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	hash_node_t *new_node = NULL;
-	hash_node_t *collision_node = NULL;
+	hash_node_t *head = NULL;
 	unsigned long int k_index;
 
 	if (ht == NULL)
@@ -48,9 +48,18 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	}
 	else
 	{
-		collision_node = ht->array[k_index];
-		new_node->next = collision_node;
-		ht->array[k_index] = new_node;
+		/* head of linked list */
+		head = ht->array[k_index];
+		if (update_list(head, key, value))
+		{
+			return (1);
+		}
+		else
+		{
+			new_node->next = head;
+			ht->array[k_index] = new_node;
+			return (0);
+		}
 	}
 
 	return (1);
@@ -99,4 +108,50 @@ hash_node_t *hash_node_create(const char *key, const char *value)
 	}
 
 	return (new_node);
+}
+
+/**
+ * update_list - updates the value of an existing key in a hash_node list.
+ * (The list is at an index in a hash table. It is created
+ *	when a collision occurs at that index)
+ *
+ * @head : first node of the linked list.
+ *
+ * @key: part of the key/value pair of a hash node
+ *			key (cannot be an empty string)
+ *
+ * @value: the value associated with the key (can be an empty str)
+ *
+ * Return: 1 on success
+ * 0 otherwise
+ */
+int update_list(hash_node_t *head, const char *key, const char *value)
+{
+	hash_node_t *node = head;
+	size_t value_size = 0;
+
+	/* check if key already exists and replace attached value*/
+	while (node != NULL)
+	{
+		if (strcmp(node->key, key) == 0)
+		{
+			/* free old value */
+			free(node->value);
+			
+			/* allocate memory for new value*/
+			value_size = strlen(value) + 1;
+			node->value = malloc(sizeof(char) * value_size);
+			if (node->value == NULL)
+			{
+				/* malloc failure */
+				return (0);
+			}
+
+			strcpy(node->value, value);
+			return (1);
+		}
+
+		node = node->next;
+	}
+	return (1);
 }
