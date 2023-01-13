@@ -50,7 +50,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	{
 		/* head of linked list */
 		head = ht->array[k_index];
-		if (update_list(head, key, value))
+		if (update_list(head, key, value) == 1)
 		{
 			return (1);
 		}
@@ -58,7 +58,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		{
 			new_node->next = head;
 			ht->array[k_index] = new_node;
-			return (0);
+			return (1);
 		}
 	}
 
@@ -111,7 +111,7 @@ hash_node_t *hash_node_create(const char *key, const char *value)
 }
 
 /**
- * update_list - updates the value of an existing key in a hash_node list.
+ * update_list - updates the value attached to an existing key in a hash_node list.
  * (The list is at an index in a hash table. It is created
  *	when a collision occurs at that index)
  *
@@ -122,7 +122,7 @@ hash_node_t *hash_node_create(const char *key, const char *value)
  *
  * @value: the value associated with the key (can be an empty str)
  *
- * Return: 1 on success
+ * Return: 1 if value in hash_node is changed.
  * 0 otherwise
  */
 int update_list(hash_node_t *head, const char *key, const char *value)
