@@ -10,7 +10,6 @@
 void hash_table_print(const hash_table_t *ht)
 {
 	unsigned long int i = 0;
-	hash_node_t *h_node = NULL;
 	int pair_count = 0;
 
 	if (ht == NULL)
@@ -22,9 +21,28 @@ void hash_table_print(const hash_table_t *ht)
 
 	while (i < (ht->size))
 	{
-		h_node = ht->array[i];
+		pair_count += print_node_list(ht->array[i], pair_count);
 
-		if (h_node != NULL && h_node->key != NULL)
+		i++;
+	}
+	printf("}\n");
+}
+
+/**
+ * print_node_list - prints elements of a hash_node linked list.
+ *
+ * @head: first node of linked list.
+ * @pair_count: number of key/value pairs already printed
+ *
+ * Return: number of printed key/value pairs
+ */
+int print_node_list(hash_node_t *head, int pair_count)
+{
+	hash_node_t *h_node = head;
+
+	while (h_node != NULL)
+	{
+		if (h_node->key != NULL)
 		{
 			if (pair_count > 0)
 			{
@@ -34,11 +52,11 @@ void hash_table_print(const hash_table_t *ht)
 			pair_count++;
 		}
 
-		if (h_node != NULL && h_node->value != NULL)
+		if (h_node->value != NULL)
 		{
 			printf(" '%s'", h_node->value);
 		}
-		i++;
+		h_node = h_node->next;
 	}
-	printf("}\n");
+	return (pair_count);
 }

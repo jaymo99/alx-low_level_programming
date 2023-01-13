@@ -41,7 +41,6 @@ hash_table_t *hash_table_create(unsigned long int size);
 unsigned long int hash_djb2(const unsigned char *str);
 unsigned long int key_index(const unsigned char *key, unsigned long int size);
 char *hash_table_get(const hash_table_t *ht, const char *key);
-void hash_table_print(const hash_table_t *ht);
 void hash_table_delete(hash_table_t *ht);
 
 /* File: 3-hash_table_set.c */
@@ -53,5 +52,10 @@ int update_list(hash_node_t *head, const char *key, const char *value);
 /* File: 4-hash_table_get.c */
 char *hash_table_get(const hash_table_t *ht, const char *key);
 void print_word(char *word);
+
+/* File: 5-hash_table_print.c */
+void hash_table_print(const hash_table_t *ht);
+int print_node_list(hash_node_t *head, int pair_count);
+
 
 #endif /* HASH_TABLES_H */
