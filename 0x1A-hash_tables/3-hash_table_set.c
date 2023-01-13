@@ -137,7 +137,7 @@ int update_list(hash_node_t *head, const char *key, const char *value)
 		{
 			/* free old value */
 			free(node->value);
-			
+
 			/* allocate memory for new value*/
 			value_size = strlen(value) + 1;
 			node->value = malloc(sizeof(char) * value_size);
@@ -153,5 +153,5 @@ int update_list(hash_node_t *head, const char *key, const char *value)
 
 		node = node->next;
 	}
-	return (1);
+	return (0);
 }
