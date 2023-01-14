@@ -68,6 +68,10 @@ int insert_item(hash_table_t *ht, unsigned int idx, hash_node_t *new_node)
 		head = ht->array[idx];
 		if (update_list(head, new_node->key, new_node->value))
 		{
+			/* free newly created node */
+			free(new_node->key);
+			free(new_node->value);
+			free(new_node);
 			return (0);
 		}
 		else
@@ -138,7 +142,7 @@ hash_node_t *hash_node_create(const char *key, const char *value)
  *
  * @value: the value associated with the key (can be an empty str)
  *
- * Return: 1 if value in hash_node is changed.
+ * Return: 1 if key already exists and value has been changed.
  * 0 otherwise
  */
 int update_list(hash_node_t *head, const char *key, const char *value)
