@@ -55,7 +55,7 @@ void print_word(char *word);
 
 /* File: 5-hash_table_print.c */
 void hash_table_print(const hash_table_t *ht);
-int print_node_list(hash_node_t *head, int pair_count);
+void print_node_list(hash_node_t *head, int *pair_count);
 
 
 #endif /* HASH_TABLES_H */

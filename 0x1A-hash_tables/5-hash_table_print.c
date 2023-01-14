@@ -21,8 +21,7 @@ void hash_table_print(const hash_table_t *ht)
 
 	while (i < (ht->size))
 	{
-		pair_count += print_node_list(ht->array[i], pair_count);
-
+		print_node_list(ht->array[i], &pair_count);
 		i++;
 	}
 	printf("}\n");
@@ -30,13 +29,12 @@ void hash_table_print(const hash_table_t *ht)
 
 /**
  * print_node_list - prints elements of a hash_node linked list.
+ * (list of collisions at an index in hash table array)
  *
  * @head: first node of linked list.
  * @pair_count: number of key/value pairs already printed
- *
- * Return: number of printed key/value pairs
  */
-int print_node_list(hash_node_t *head, int pair_count)
+void print_node_list(hash_node_t *head, int *pair_count)
 {
 	hash_node_t *h_node = head;
 
@@ -44,12 +42,12 @@ int print_node_list(hash_node_t *head, int pair_count)
 	{
 		if (h_node->key != NULL)
 		{
-			if (pair_count > 0)
+			if (*pair_count > 0)
 			{
 				printf(", ");
 			}
 			printf("'%s':", h_node->key);
-			pair_count++;
+			(*pair_count)++;
 		}
 
 		if (h_node->value != NULL)
@@ -58,5 +56,4 @@ int print_node_list(hash_node_t *head, int pair_count)
 		}
 		h_node = h_node->next;
 	}
-	return (pair_count);
 }
