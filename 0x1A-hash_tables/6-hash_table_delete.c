@@ -34,7 +34,7 @@ void hash_table_delete(hash_table_t *ht)
 /**
  * delete_node_list - deletes a linked list of hash nodes.
  *
- * @hn: hash node
+ * @head: first node of hash node linked list
  */
 void delete_node_list(hash_node_t *head)
 {
