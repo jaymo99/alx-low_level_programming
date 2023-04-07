@@ -12,20 +12,20 @@ void hash_table_print(const hash_table_t *ht)
 	hash_node_t *node = NULL;
 	int counter = 0;
 
-	if(ht == NULL || ht->array == NULL)
+	if (ht == NULL || ht->array == NULL)
 	{
 		return;
 	}
 
 	printf("{");
-	for(i = 0; i < ht->size; i++)
+	for (i = 0; i < ht->size; i++)
 	{
 		if (ht->array[i] == NULL)
 		{
 			continue;
 		}
 		node = ht->array[i];
-		while(node)
+		while (node)
 		{
 			if (counter > 0)
 			{
