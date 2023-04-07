@@ -50,5 +50,8 @@ hash_node_t *key_exists(hash_node_t *head, const char *key);
 void update_node_value(hash_node_t *node, const char *value);
 hash_node_t *hash_node_create(const char *key, const char *value);
 
+/* 4-hash_table_get.c */
+char *hash_table_get(const hash_table_t *ht, const char *key);
+
 
 #endif /* HASH_TABLES_H */
