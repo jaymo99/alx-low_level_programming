@@ -1,0 +1,32 @@
+CC=gcc
+CFLAGS=-Wall -Werror -Wextra -pedantic
+SRC=main.c school.c
+OBJ=$(SRC:.c=.o)
+NAME=school
+RM=rm -f
+
+# declare phony targets
+.PHONY: clean oclean fclean re
+
+# creates the main program
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
+
+$(OBJ): %.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+# deletes all Emacs and Vim temp files along with the executable
+clean:
+	-$(RM) *~ $(NAME)
+
+# deletes the object files
+oclean:
+	-$(RM) $(OBJ)
+
+# deletes all Emacs and Vim temp files, the executable and object files
+fclean: clean oclean
+
+# forces recompilation of all source files
+re: oclean all
