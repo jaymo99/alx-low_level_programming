@@ -2,6 +2,7 @@ CC=gcc
 SRC=main.c school.c
 OBJ=$(SRC:.c=.o)
 NAME=school
+RM=rm -f
 
 # declare phony targets
 .PHONY: clean oclean fclean re
@@ -17,10 +18,10 @@ $(OBJ): %.o: %.c
 
 # deletes all Emacs and Vim temp files along with the executable
 clean:
-	-rm -f *~ .*~ *.swp $(NAME)
+	-$(RM) *~ $(NAME)
 # deletes the object files
 oclean:
-	-rm -f $(OBJ)
+	-$(RM) $(OBJ)
 
 # deletes all Emacs and Vim temp files, the executable and object files
 fclean: clean oclean
