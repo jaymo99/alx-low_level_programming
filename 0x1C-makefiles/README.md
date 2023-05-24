@@ -1,9 +1,10 @@
-# :0x1C. C - Makefiles
+# 0x1C. C - Makefiles
 
 ## Resources
-* Makefile
-* Installing the make utility
-* make-official documentation
+* [Makefile](https://intranet.alxswe.com/rltoken/moIpBFMN3sJcVMNn5VIFlA)
+* [A short introduction to makefile](https://www3.nd.edu/~zxu2/acms60212-40212/Makefile.pdf)
+* [Installing the make utility](https://intranet.alxswe.com/rltoken/1AUviCUw3TrznESzWbrKAQ)
+* [make-official documentation](https://intranet.alxswe.com/rltoken/vQFeXLq1izNua2z2dVl5Yg)
 
 ## General Learning Objectives
 * What are make, Makefiles
@@ -17,24 +18,27 @@
 A Makefile is a file used by the make build automation tool to specify a set of rules for building and managing a project. It is commonly used in C projects to define the compilation and linking process.
 
 Here's a basic example of a Makefile for a C project
-	CC = gcc
-	CFLAGS = -Wall -Wextra
 
-	SRCS = main.c utils.c
-	OBJS = $(SRCS:.c=.o)
-	TARGET = myprogram
+```makefile
+CC = gcc
+CFLAGS = -Wall -Wextra
 
-	all: $(TARGET)
+SRCS = main.c utils.c
+OBJS = $(SRCS:.c=.o)
+TARGET = myprogram
 
-	$(TARGET): $(OBJS)
-		$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+all: $(TARGET)
 
-	.c.o:
-		$(CC) $(CFLAGS) -c $< -o $@
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 
-	clean:
-		rm -f $(OBJS) $(TARGET)
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@
 
+clean:
+	rm -f $(OBJS) $(TARGET)
+
+```
 
 In this example, we define variables for the C compiler (`CC`) and compiler flags (`CFLAGS`). We also define the source files (`SRCS`), object files (`OBJS`), and the target executable (`TARGET`).
 
@@ -52,14 +56,17 @@ To build the project, you can simply run `make` in the directory containing the 
 
 This is just a simple example, and Makefiles can be more complex depending on the requirements of your project. However, it should give you a basic understanding of how to create a Makefile for a C project.
 
+<br>
 
 ## QuickStart guide to creating Makefiles
 In a Makefile, ***rules*** define how to build ***targets*** and their ***dependencies.*** Each rule consists of a `target`, `dependencies`, and `commands`.
 
 Let's break down the example rule in my Makefile (0-Makefile):
 
-	school: main.c school.c
-		gcc main.c school.c -o school
+```makefile
+school: main.c school.c
+	gcc main.c school.c -o school
+```
 
 * **Target:** The target is the file or task that the rule describes how to build. In this case, the target is `school.` It is the desired output file, which will be created by the rule.
 
